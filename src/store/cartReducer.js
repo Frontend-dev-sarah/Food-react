@@ -1,4 +1,5 @@
-import { ADD_CART_ITEM, REMOVE_CART_ITEM } from "./actions";
+import { ADD_CART_ITEM, CLEAR_CART_ITEM, REMOVE_CART_ITEM } from "./actions";
+import { cartInitialState } from "./initialState";
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -13,9 +14,6 @@ const cartReducer = (state, action) => {
         const existingItemIndex = state.items.findIndex(
           (item) => item.id === action.payload.id
         );
-
-        console.log("existingItemIndex");
-        console.log(existingItemIndex);
         existingItem = {
           ...existingItem,
           amount: existingItem.amount + action.payload.amount,
@@ -39,11 +37,6 @@ const cartReducer = (state, action) => {
         const updatedItemIndex = state.items.findIndex(
           (item) => item.id === action.payload
         );
-        console.log("newItem====");
-        console.log(action.payload);
-        console.log(updatedItemIndex);
-        console.log(updatedItemIndex);
-
         newItem = { ...newItem, amount: newItem.amount - 1 };
         newItems = [...state.items];
         newItems[updatedItemIndex] = newItem;
@@ -55,6 +48,8 @@ const cartReducer = (state, action) => {
         items: newItems,
         totalAmount: newTotalAmount,
       };
+    case CLEAR_CART_ITEM:
+      return cartInitialState;
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM } from "./actions";
+import { ADD_CART_ITEM, CLEAR_CART_ITEM, REMOVE_CART_ITEM } from "./actions";
 import CartContext from "./cartContext";
 import cartReducer from "./cartReducer";
 import { cartInitialState } from "./initialState";
@@ -13,6 +13,9 @@ const CartProvider = (props) => {
   const removeItemFromCart = (id) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: id });
   };
+  const clearCartItem = () => {
+    dispatch({ type: CLEAR_CART_ITEM });
+  };
 
   //Context data and methods
   const cartContext = {
@@ -20,6 +23,7 @@ const CartProvider = (props) => {
     totalAmount: state.totalAmount,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
+    clearItem: clearCartItem,
   };
   return (
     <CartContext.Provider value={cartContext}>

@@ -29,7 +29,7 @@ const MealProvider = ({ children }) => {
     //   });
     //})
     try {
-      const response = await fetch(BASE_URL);
+      const response = await fetch(`${BASE_URL}/meals.json`);
       if (!response.ok) {
         throw new Error("Somethig goes wrong !");
       }
